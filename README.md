@@ -27,14 +27,10 @@ Here's a breakdown of the project's dependencies and their roles:
 
 - **`flutter`:** The core Flutter framework for building cross-platformmobile applications.
 - **`cupertino_icons`:** Provides a set of Cupertino-style icons for a consistent look and feel across iOS and Android.
-- **`cloud_firestore`:** Enables seamless integration with Cloud Firestore, a NoSQL cloud database for storing and syncing data.
 - **`dio`:** A powerful HTTP client for making network requests, simplifying API interactions.
-- **`firebase_core`:** Initializes Firebase services within the Flutter app, providing access to various Firebase features.
-- **`firebase_auth`:** Facilitates user authentication using Firebase Authentication, supporting various authentication methods.
 - **`freezed_annotation`:** Generates immutable data classes using the Freezed package, promoting code safety and maintainability.
 - **`get`:** A lightweight and powerful state management solution for Flutter, simplifying data flow and UI updates.
 - **`get_it`:** A service locator for dependency injection, improving code organization and testability.
-- **`google_sign_in`:** Flutter plugin for Google Sign-In, a secure authentication system for signing in with a Google account.
 - **`injectable`:** Enhances dependency injection with annotations and code generation, reducing boilerplate.
 - **`json_annotation`:** Facilitates JSON serialization and deserialization, enabling easy data exchange with APIs.
 - **`json_serializable`:** Generates code for converting Dart objects to and from JSON format.
