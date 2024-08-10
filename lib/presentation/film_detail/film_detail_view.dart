@@ -7,6 +7,7 @@ import 'package:tmdb_ek/presentation/film_detail/film_detail_controller.dart';
 import 'package:tmdb_ek/presentation/routes.dart';
 import 'package:tmdb_ek/presentation/widget/film_card_horizontal.dart';
 import 'package:tmdb_ek/presentation/widget/film_card_horizontal_loading.dart';
+import 'package:tmdb_ek/presentation/widget/rating.dart';
 
 class FilmDetailView extends GetView<FilmDetailController> {
   const FilmDetailView({super.key});
@@ -82,7 +83,22 @@ class FilmDetailView extends GetView<FilmDetailController> {
                             );
                           }),
                           const SizedBox(height: 8),
-                          // Rating(voteAverage: film.voteAverage),
+                          Rating(voteAverage: controller.film.voteAverage),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Overview',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Obx(() {
+                            if (controller.isLoading.value) {
+                              return shimmerLoading();
+                            }
+                            return Text(controller.film.overview);
+                          }),
                           const SizedBox(height: 8),
                           SizedBox(
                             width: double.infinity,
@@ -139,21 +155,6 @@ class FilmDetailView extends GetView<FilmDetailController> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            'Overview',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Obx(() {
-                            if (controller.isLoading.value) {
-                              return shimmerLoading();
-                            }
-                            return Text(controller.film.overview);
-                          }),
-                          const SizedBox(height: 8),
                           Obx(() {
                             return controller.similarList.value.maybeWhen(
                               orElse: () => const SizedBox.shrink(),
@@ -171,18 +172,32 @@ class FilmDetailView extends GetView<FilmDetailController> {
                                   },
                                 ),
                               ),
-                              success: (data) => SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 6,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return FilmCardHorizontal(
-                                        film: data[index]);
-                                  },
-                                ),
+                              success: (data) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Similar Movies',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.3,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: 6,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return FilmCardHorizontal(
+                                            film: data[index]);
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           }),

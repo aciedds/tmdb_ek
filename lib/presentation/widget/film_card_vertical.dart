@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tmdb_ek/domain/entity/film_entity/film_entity.dart';
+import 'package:tmdb_ek/presentation/widget/rating.dart';
 
 class FilmCardVertical extends StatelessWidget {
   final FilmEntity film;
@@ -44,7 +45,7 @@ class FilmCardVertical extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 8),
-                      // Rating(voteAverage: film.voteAverage),
+                      Rating(voteAverage: film.voteAverage),
                       const SizedBox(height: 8),
                       Text(
                         film.overview,
